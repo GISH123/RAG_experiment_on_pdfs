@@ -32,14 +32,25 @@ def init_query_engine_with_4_bars():
     # STEP 4: Creating Query Engine
     progress4 = tqdm(range(1), desc="Step 4: Building query engine", position=3, leave=True)
     for _ in progress4:
-
+        
         # 這邊可以調整query的方式，會影響準度
+        
+        # 法1 用top_k的方式去找出最相關的幾個chunk，限制:無法看到所有的文件
+        # ===
         # query_engine = index.as_query_engine()
 
+        # query_engine = index.as_query_engine(
+        #     top_k=9999
+        # )
+        # ===
+
+        # 法2 search_mode="hybrid"
+        # ===
         query_engine = index.as_query_engine(
-            top_k=9999,
-            response_mode="tree_summarize",
+            search_mode="hybrid",  # or "keyword"
+            top_k=9999
         )
+        # ===
 
         time.sleep(1)
 
