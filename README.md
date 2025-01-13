@@ -1,0 +1,2 @@
+# RAG_experiment_on_pdfs
+中華經濟研究院的書籍RAG專案實驗，延續另一個pdf_text_recognization專案，期以創造出可以對話的LLM agent
