@@ -48,7 +48,7 @@ langchain-core==0.3.29
 langchain-text-splitters==0.3.5
 langsmith==0.2.10
 llama-cloud==0.1.8
-llama-hub==0.0.45 # llama-hub==0.0.79.post1 will prevent using python 3.12 which Vercel insists
+# llama-hub==0.0.45 # llama-hub==0.0.79.post1 will prevent using python 3.12 which Vercel insists
 llama-index==0.12.10
 llama-index-agent-openai==0.4.1
 llama-index-cli==0.4.0
@@ -68,7 +68,7 @@ MarkupSafe==3.0.2
 marshmallow==3.25.0
 mdurl==0.1.2
 mkl==2025.0.1
-mkl-service==2.4.0
+mkl-service==2.4.2
 mkl_fft==1.3.11
 mkl_random==1.2.8
 mpmath==1.3.0
