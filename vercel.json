@@ -3,10 +3,7 @@
     "builds": [
       {
         "src": "Step3_query_engine_as_server.py",
-        "use": "@vercel/python",
-        "config": {
-          "pythonVersion": "3.10"
-        }
+        "use": "@vercel/python"
       }
     ],
     "routes": [
@@ -14,10 +11,5 @@
         "src": "/(.*)",
         "dest": "Step3_query_engine_as_server.py"
       }
-    ],
-    "build": {
-      "env": {
-        "PYTHON_VERSION": "3.10"
-      }
-    }
+    ]
   }
