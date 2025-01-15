@@ -21,7 +21,7 @@ def init_query_engine_with_4_bars(vector_db_path):
     # STEP 2: Loading StorageContext
     progress2 = tqdm(range(1), desc="Step 2: Loading StorageContext", position=1, leave=True)
     for _ in progress2:
-        storage_context = StorageContext.from_defaults(vector_db_path)
+        storage_context = StorageContext.from_defaults(persist_dir=vector_db_path)
         time.sleep(1)  # simulate some I/O
 
     # STEP 3: Loading Index
@@ -55,7 +55,7 @@ def init_query_engine_with_4_bars(vector_db_path):
 
         time.sleep(1)
 
-    print("Initialization complete!")
+    st.info("Initialization complete!")
     return query_engine
 
 def main():
