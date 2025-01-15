@@ -3,9 +3,10 @@ from tqdm import tqdm
 from llama_index.core import StorageContext, load_index_from_storage
 from use_openapi import use_openapi
 import streamlit as st
+import config
 
 @st.cache_resource
-def init_query_engine_with_4_bars():
+def init_query_engine_with_4_bars(vector_db_path):
     """
     Initializes the query engine with 4 separate tqdm progress bars,
     each representing one step. Displayed in the server console.
@@ -20,7 +21,7 @@ def init_query_engine_with_4_bars():
     # STEP 2: Loading StorageContext
     progress2 = tqdm(range(1), desc="Step 2: Loading StorageContext", position=1, leave=True)
     for _ in progress2:
-        storage_context = StorageContext.from_defaults(persist_dir="20250113_rag_1996_2024")
+        storage_context = StorageContext.from_defaults(vector_db_path)
         time.sleep(1)  # simulate some I/O
 
     # STEP 3: Loading Index
@@ -62,7 +63,7 @@ def main():
 
     # If we haven't initialized the engine yet, do so now
     if "query_engine" not in st.session_state:
-        st.session_state["query_engine"] = init_query_engine_with_4_bars()
+        st.session_state["query_engine"] = init_query_engine_with_4_bars(config.vector_db_path)
 
     # Ask a question
     user_query = st.text_input("Ask a question about the stored documents:")

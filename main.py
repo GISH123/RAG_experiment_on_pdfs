@@ -1,6 +1,7 @@
 import os
 import requests
 import zipfile
+import config
 
 if __name__ == "__main__":
 
@@ -49,8 +50,12 @@ if __name__ == "__main__":
     # 我花了一些時間才找到方法，要先下載然後暫停才能複製連結
     onedrive_direct_download_link = "https://my.microsoftpersonalcontent.com/personal/679e347b4c35424f/_layouts/15/download.aspx?UniqueId=79c40ed4-8c7e-4eda-94bc-8b1cfa5bedff&Translate=false&tempauth=v1e.eyJzaXRlaWQiOiIwOTM0OTdiYy0yMTAwLTQ2YjktODliOS01MGM3ZWMxNjA1ODciLCJhcHBpZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDA0ODE3MTBhNCIsImF1ZCI6IjAwMDAwMDAzLTAwMDAtMGZmMS1jZTAwLTAwMDAwMDAwMDAwMC9teS5taWNyb3NvZnRwZXJzb25hbGNvbnRlbnQuY29tQDkxODgwNDBkLTZjNjctNGM1Yi1iMTEyLTM2YTMwNGI2NmRhZCIsImV4cCI6IjE3MzY4NDc4NjQifQ.CAlYctTc1QiAQaroYeV3V0FDybsyH6cyVemlp_OBgwT7ZLvRVsyOL0pZ2A8DVctlk8Q6kyjvI5I5V9FSPd5klJ9FRWNDap34uExTfP7s3YQS8UVClQ6vAR7ZQSHFXajIKdU1HkCQsDG9xV6eE0TotRFQj1r5kPV8kS2g5K-6GSmESrartLb4kxIgm3KE7uiA2z9CbgjpVwzAlO2cXUK-_FO-2uK9N2KPjO1SJ9O_wDNBznsAzr5wUQOvHnBcjoJbP5hY2aHIBZmnfeRNlRJuU9SvleBorlkFfsE1VueTYYGSqTxN2QqXYkZzBTInUXSZRtoWqxG7-KS7MKbm8mCL-j2MRPwhL5shvHGT-rtmC7g6wKnkAz_Pb5VUhZOfQrPseyp03A-X7nN53OxaJrNDZQ.7GI-xGbJ93Rsfl631jPD567JuAQhebfreg-bxNx7rN0&ApiVersion=2.0&AVOverride=1"
 
-    zip_path = "20250113_rag_1996_2024.zip"
-    extract_to_folder = "20250113_rag_1996_2024"
+
+    # zip_path = "20250113_rag_1996_2024.zip"
+    # extract_to_folder = "20250113_rag_1996_2024"
+
+    zip_path = "/tmp/20250113_rag_1996_2024.zip"
+    extract_to_folder = config.vector_db_path
 
     download_and_extract(onedrive_direct_download_link, zip_path, extract_to_folder)
 
