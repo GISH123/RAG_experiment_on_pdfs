@@ -5,6 +5,8 @@ from use_openapi import use_openapi
 import streamlit as st
 import config
 
+st.write("✅ Step3_query_engine_as_server.py started!")  # Debug log
+
 @st.cache_resource
 def init_query_engine_with_4_bars(vector_db_path):
     """

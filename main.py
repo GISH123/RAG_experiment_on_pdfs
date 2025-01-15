@@ -5,6 +5,8 @@ import config
 import streamlit as st  # Import Streamlit for UI logging
 import Step3_query_engine_as_server
 
+st.write("✅ main.py started!")  # Debug log
+
 if __name__ == "__main__":
 
     def download_and_extract(url, save_path, extract_to):
