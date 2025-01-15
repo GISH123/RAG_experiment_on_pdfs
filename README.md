@@ -1,7 +1,8 @@
 
 
 當在我的電腦架好server時，可至以下網址嘗試對話:  
-http://10.141.31.43:8501  
+https://ragexp.streamlit.app/ <= EDIT : 改為使用streamlit連結github ，以方便demo，給其他使用者來玩看看  
+
 ![alt text](image-1.png)
 
 
