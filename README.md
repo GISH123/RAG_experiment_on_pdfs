@@ -1,46 +1,85 @@
+中經院內部文件檔案RAG專案實驗 - Chat UI 加強版  
+此版用的是自行將8本全球經濟展望專書(每個文檔至少200頁以上)用open ai embed到vectordb的版本 
+因RAG與成本的限制，每次prompt只會找出最相關的top 2文件做回答，所以一次要問八個書的資訊是不太可能(當然，如果code裡面硬性要求找出所有問件，除了時間成本，cost也會提高許多)  
+這邊使用的是我去註冊的open api key，每次prompt都會花少量的錢，就不特別調整模型準度的部分了  
 
 
-當在我的電腦架好server時，可至以下網址嘗試對話:  
-https://ragexp.streamlit.app/ <= EDIT : 改為使用streamlit連結github ，以方便demo，給其他使用者來玩看看  
+2025/01/20 RAG chat UI 加強  
 
-![alt text](image-1.png)
+以下為claude 3.5 sonnet 製造出的readme:  
 
+# RAG-Powered Economic Research Assistant
 
-因容量與價錢限制，我先將文本集固定在8本全球經濟展望專書  
-每個文檔至少200頁以上  
-![alt text](image.png)
+A Retrieval-Augmented Generation (RAG) chatbot that analyzes economic outlook reports, built with LlamaIndex and OpenAI.
 
+## Project Overview
 
-================================
-20250113 嘗試的Q&A
+This project demonstrates the practical application of RAG technology to analyze complex economic documents. It currently processes 8 comprehensive global economic outlook reports (200+ pages each) to provide intelligent responses to economic queries.
 
-Prompt :  請告訴我 五加二的創新產業
-from 2017全球經濟展望專書-CB201701.pdf Page 141/272  
- - 五加二的創新產業（綠能、生技醫療、亞洲矽谷、智慧製造、國防產業，以及新農業、循環產業等）  
+### Key Features
 
-Response by query_engine(gpt-4):
-"五加二的創新產業"是一種產業發展策略，主要包括五大產業和兩個附加產業。這五大產業包括綠能、國防、生技醫療、亞洲矽谷和智慧機械。另外兩個附加產業是新農業和循環經濟。這些產業
-的發展主要訴求是連結國際、連結未來、連結在地。然而，這些政策主要是中長期的結構轉型政策，短期對民眾的正面影響可能相當有限。這些政策需要與具體的經濟數據，如就業機會、薪水的 漲升、GDP的創造等進行有效連結，才能使民眾有感。
+- **Document Processing**: Custom PDF processing pipeline with PyMuPDF for accurate text extraction
+- **Advanced RAG Implementation**: Hybrid search mode combining semantic and keyword search for improved accuracy
+- **Conversational Memory**: Maintains chat history for contextual responses
+- **Streamlit Web Interface**: User-friendly chat interface with conversation management
+- **Automated Document Naming**: Smart conversation title generation based on initial queries
 
-Response by query_engine(gpt-3.5-turbo):
-綠能科技產業、亞洲矽谷產業、智慧機器創新產業、振興國防產業、生技醫藥研發產業。
+### Technical Stack
 
-Ground Truth : 2017全球經濟展望專書-CB201701.pdf Page 141/272 
-蔡政府上臺後，推出一系列嶄新的財經政策包括：五加二的創新產
-業（綠能、生技醫療、亞洲矽谷、智慧製造、國防產業，以及新農業、
-循環產業等）、新南向政策，以及加強推動泛太平洋夥伴協議（TPP）。
-同時，強調年金改革、能源的轉型及解決勞資對立的困境。而在新政策
-的背後必須有嶄新的思維及體制的調整，才能引領臺灣加速升級轉型，
-創造下一波的經濟動能。
+- **Framework**: LlamaIndex for RAG implementation
+- **LLM**: OpenAI GPT-3.5/4 for response generation
+- **Embeddings**: OpenAI text embeddings
+- **Frontend**: Streamlit
+- **Document Processing**: PyMuPDF, custom chunking with sentence splitting
+- **Storage**: Local vector storage with persistence
 
+## Live Demo
 
-Promt : 請告訴我 新型舉國體制 的意義  
-from 2022全球經濟展望專書-CB202201.pdf Page 99/240  
- - 「新型舉國體制」源自中國共產黨十九屆四中全會通過的《中共中
-央關於堅持和完善中國特色社會主義制度、推進國家治理體系和治理能
-力現代化若干重大問題的決定》，內容提出：「要加快建設創新型國家，
-強化國家戰略科技力量，構建社會主義市場經濟條件下關鍵核心技術攻
-關新型舉國體制」  ......
+Try the application at: https://ragexp.streamlit.app/
 
-Response by query_engine(gpt-3.5-turbo):
-'"新型舉國體制" 的意義是指根據中國共產黨十九屆四中全會通過的決定，以國家最高利益或主導性利益為目標，通過全國資源的集中配置，發揮社會主義「集中力量辦大事」的特色與能量，協助實現既定的國家戰略目標。其目的在於建立適合中國大陸科技創新的制度安排，尋求更高效的科技創新組織方式，以因應目前與未來的挑戰與發展環境。'
+![Chat Interface Screenshot](image.png)
+
+## Example Queries
+
+The system can handle various economic queries. Some examples:
+
+1. **Policy Analysis**:
+   ```
+   Q: "請告訴我 五加二的創新產業"
+   A: 五加二創新產業包括綠能、國防、生技醫療、亞洲矽谷、智慧機械、新農業和循環經濟。
+   ```
+
+2. **Economic Concepts**:
+   ```
+   Q: "請告訴我 新型舉國體制 的意義"
+   A: 新型舉國體制的意義在於探索建立適合中國大陸科技創新的制度安排，尋求更有效的組織方法來應對當前和未來的挑戰和發展環境。
+   ```
+
+## Technical Implementation Details
+
+- Custom document chunking strategy (512 tokens with 20-token overlap)
+- Hybrid search implementation for optimal retrieval
+- Persistent storage management for efficient data handling
+- Automated ZIP file handling for document updates
+
+## Future Enhancements
+
+- Integration with more economic data sources
+- Multi-language support enhancement
+- Advanced analytics dashboard
+- Real-time economic data integration
+
+## Skills Demonstrated
+
+- Large Language Model (LLM) Integration
+- Vector Database Implementation
+- RAG System Architecture
+- Python Development
+- Web Application Development
+- Document Processing
+- API Integration
+- Data Engineering
+
+## Contact
+
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/gish-shao-196aab134/) for discussions about this project or AI/ML opportunities.
