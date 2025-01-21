@@ -36,7 +36,7 @@ This project demonstrates the practical application of RAG technology to analyze
 
 ## Live Demo
 
-Try the application at: [https://ragexp.streamlit.app/](https://ragonmyvectordb.streamlit.app/)  
+Try the application at: [https://ragonmyvectordb.streamlit.app/](https://ragonmyvectordb.streamlit.app/)  
 要使用我的vector db的話可以跟我說  
 
 ![Chat Interface Screenshot](image.png)
