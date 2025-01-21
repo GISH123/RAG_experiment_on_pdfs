@@ -2,10 +2,14 @@ import time
 import streamlit as st
 import json
 import os
-from llama_index.core import StorageContext, load_index_from_storage
+from llama_index.core import StorageContext, VectorStoreIndex
 from use_openapi import use_openapi
 import config
 from datetime import datetime
+from astrapy import DataAPIClient
+from llama_index.vector_stores.astra_db import AstraDBVectorStore
+from llama_index.embeddings.openai import OpenAIEmbedding
+from dotenv import load_dotenv
 
 CONVERSATIONS_FILE = "./tmp/conversations.json"
 
@@ -47,10 +51,41 @@ def summarize_prompt_as_title(prompt: str, max_words: int = 5) -> str:
 # Caching: Load the index once
 # -----------------------------
 @st.cache_resource
-def load_my_index(persist_dir):
+def load_my_index():
+    """Load index from AstraDB instead of local storage"""
     use_openapi()  # sets up your OPENAI_API_KEY, etc.
-    storage_context = StorageContext.from_defaults(persist_dir=persist_dir)
-    index = load_index_from_storage(storage_context)
+    
+    # Load environment variables
+    load_dotenv()
+    
+    # Get AstraDB credentials
+    api_endpoint = os.getenv('api_endpoint')
+    token = os.getenv('token')
+    
+    if not api_endpoint or not token:
+        raise ValueError("Missing AstraDB credentials in .env file")
+    
+    # Initialize AstraDB vector store
+    astra_db_store = AstraDBVectorStore(
+        token=token,
+        api_endpoint=api_endpoint,
+        collection_name="cier2_collection",
+        embedding_dimension=1536
+    )
+    
+    # Initialize embedding model
+    embed_model = OpenAIEmbedding(model_name="text-embedding-3-small")
+    
+    # Create storage context
+    storage_context = StorageContext.from_defaults(vector_store=astra_db_store)
+    
+    # Create index from vector store
+    index = VectorStoreIndex.from_vector_store(
+        vector_store=astra_db_store,
+        storage_context=storage_context,
+        embed_model=embed_model
+    )
+    
     return index
 
 def init_chat_engine(index):
@@ -70,7 +105,10 @@ def init_chat_engine(index):
 # MAIN APP
 # -----------------------------
 def main():
-    st.title("My RAG Chat App")
+    st.title("中華經濟研究院「研究成果AI化服務」RAG實驗")
+
+    # Add LinkedIn profile link under the title
+    st.markdown("[LinkedIn Profile](https://www.linkedin.com/in/gish-shao-196aab134/)")
 
     # -----------------------------
     # 1) Load or initialize conversations from disk
@@ -81,7 +119,7 @@ def main():
 
     # 2) Load the index if not done
     if "index" not in st.session_state:
-        st.session_state["index"] = load_my_index(config.vector_db_path)
+        st.session_state["index"] = load_my_index()
 
     # 3) Keep track of which conversation is selected
     if "selected_session" not in st.session_state:

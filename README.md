@@ -1,8 +1,8 @@
 中經院內部文件檔案RAG專案實驗 - Chat UI 加強版  
-此版用的是自行將8本全球經濟展望專書(每個文檔至少200頁以上)用open ai embed到vectordb的版本 
+此版用的是 中經院將他們的文本embed到astra db的版本  即 使用外部導入的vector db(astradb)  
 因RAG與成本的限制，每次prompt只會找出最相關的top 2文件做回答，所以一次要問八個書的資訊是不太可能(當然，如果code裡面硬性要求找出所有問件，除了時間成本，cost也會提高許多)  
 這邊使用的是我去註冊的open api key，每次prompt都會花少量的錢，就不特別調整模型準度的部分了  
-
+https://ragexp.streamlit.app/  
 
 2025/01/20 RAG chat UI 加強  
 
@@ -35,8 +35,7 @@ This project demonstrates the practical application of RAG technology to analyze
 
 ## Live Demo
 
-Try the application at: https://ragexp.streamlit.app/ <== 注意，此版本是production版本，用的db是中經院提供的astra db文本， 內容較龐大  
-要使用我的vector db的話可以跟我說  
+Try the application at: https://ragexp.streamlit.app/  
 
 ![Chat Interface Screenshot](image.png)
 
