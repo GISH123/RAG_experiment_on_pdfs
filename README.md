@@ -35,7 +35,8 @@ This project demonstrates the practical application of RAG technology to analyze
 
 ## Live Demo
 
-Try the application at: https://ragexp.streamlit.app/
+Try the application at: https://ragexp.streamlit.app/ <== 注意，此版本是production版本，用的db是中經院提供的astra db文本， 內容較龐大  
+要使用我的vector db的話可以跟我說  
 
 ![Chat Interface Screenshot](image.png)
 
