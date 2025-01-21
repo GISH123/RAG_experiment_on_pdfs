@@ -5,6 +5,8 @@
 https://ragonmyvectordb.streamlit.app/  
 因streamlit是deploy在網路上 用的是他們的server 速度會比local自己建還慢一點 每按一個動作都要等一點延遲  
 
+=============================================================================================================================
+
 2025/01/20 RAG chat UI 加強  
 
 以下為claude 3.5 sonnet 製造出的readme:  
@@ -37,7 +39,6 @@ This project demonstrates the practical application of RAG technology to analyze
 ## Live Demo
 
 Try the application at: [https://ragonmyvectordb.streamlit.app/](https://ragonmyvectordb.streamlit.app/)  
-要使用我的vector db的話可以跟我說  
 
 ![Chat Interface Screenshot](image.png)
 
