@@ -70,7 +70,10 @@ def init_chat_engine(index):
 # MAIN APP
 # -----------------------------
 def main():
-    st.title("My RAG Chat App")
+    st.title("中華經濟研究院「研究成果AI化服務」RAG實驗")
+
+    # Add LinkedIn profile link under the title
+    st.markdown("[LinkedIn Profile](https://www.linkedin.com/in/gish-shao-196aab134/)")
 
     # -----------------------------
     # 1) Load or initialize conversations from disk
