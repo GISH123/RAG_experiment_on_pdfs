@@ -3,7 +3,7 @@
 因RAG與成本的限制，每次prompt只會找出最相關的top 2文件做回答，所以一次要問八個書的資訊是不太可能(當然，如果code裡面硬性要求找出所有問件，除了時間成本，cost也會提高許多)  
 這邊使用的是我去註冊的open api key，每次prompt都會花少量的錢，就不特別調整模型準度的部分了  
 https://ragonmyvectordb.streamlit.app/  
-
+因streamlit是deploy在網路上 用的是他們的server 速度會比local自己建還慢一點 每按一個動作都要等一點延遲  
 
 2025/01/20 RAG chat UI 加強  
 
