@@ -1,4 +1,4 @@
-https://gamma.app/docs/LlamaIndex-RAG--rix0jnlnfuepdr5?mode=doc
+PowerPoint: https://gamma.app/docs/LlamaIndex-RAG--rix0jnlnfuepdr5?mode=doc
 
 中經院內部文件檔案RAG專案實驗 - Chat UI 加強版  
 此版用的是自行將8本全球經濟展望專書(每個文檔至少200頁以上)用open ai embed到vectordb的版本，即，local自建db版  
