@@ -7,6 +7,48 @@ PowerPoint: https://gamma.app/docs/LlamaIndex-RAG--rix0jnlnfuepdr5?mode=doc
 https://ragonmyvectordb.streamlit.app/  
 因streamlit是deploy在網路上 用的是他們的server 速度會比local自己建還慢一點 每按一個動作都要等一點延遲  
 
+簡易架構圖 : 
+
+8 本經濟研究 PDF
+       │
+       ▼
+PyMuPDFReader
+       │
+       ▼
+合併每本 PDF 的文字
+       │
+       ▼
+SentenceSplitter
+512 tokens / 20 overlap
+       │
+       ▼
+OpenAI Embedding
+text-embedding-ada-002
+       │
+       ▼
+LlamaIndex VectorStoreIndex
+SimpleVectorStore
+       │
+       ▼
+Local Persistent Storage
+       │
+       ▼
+使用者輸入問題
+       │
+       ▼
+OpenAI Query Embedding
+       │
+       ▼
+Vector Similarity Search
+Default Top K = 2
+       │
+       ▼
+GPT-3.5 Turbo
+       │
+       ▼
+回答使用者
+
+
 =============================================================================================================================
 
 2025/01/20 RAG chat UI 加強  
