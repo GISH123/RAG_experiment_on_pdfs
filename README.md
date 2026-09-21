@@ -7,46 +7,74 @@ PowerPoint: https://gamma.app/docs/LlamaIndex-RAG--rix0jnlnfuepdr5?mode=doc
 https://ragonmyvectordb.streamlit.app/  
 因streamlit是deploy在網路上 用的是他們的server 速度會比local自己建還慢一點 每按一個動作都要等一點延遲  
 
-簡易架構圖 : 
+### 1. Indexing Pipeline — 建立向量索引
 
-8 本經濟研究 PDF
-       │
-       ▼
-PyMuPDFReader
-       │
-       ▼
-合併每本 PDF 的文字
-       │
-       ▼
-SentenceSplitter
-512 tokens / 20 overlap
-       │
-       ▼
-OpenAI Embedding
-text-embedding-ada-002
-       │
-       ▼
-LlamaIndex VectorStoreIndex
-SimpleVectorStore
-       │
-       ▼
-Local Persistent Storage
-       │
-       ▼
-使用者輸入問題
-       │
-       ▼
-OpenAI Query Embedding
-       │
-       ▼
-Vector Similarity Search
-Default Top K = 2
-       │
-       ▼
-GPT-3.5 Turbo
-       │
-       ▼
-回答使用者
+```text
+8 Economic Research PDFs
+         │
+         ▼
+   PyMuPDFReader
+   PDF Text Extraction
+         │
+         ▼
+   Merge PDF Pages
+   One Document per PDF
+         │
+         ▼
+   SentenceSplitter
+   ├── Chunk Size: 512 tokens
+   └── Chunk Overlap: 20 tokens
+         │
+         ▼
+   OpenAI Embedding
+   text-embedding-ada-002
+         │
+         ▼
+   LlamaIndex VectorStoreIndex
+         │
+         ▼
+   SimpleVectorStore
+         │
+         ▼
+   Local Persistent Storage
+   20250113_rag_1996_2024/
+```
+
+### 2. Retrieval & Generation Pipeline — 查詢與回答
+
+```text
+       User Question
+             │
+             ▼
+       Streamlit Chat UI
+             │
+             ▼
+       Query Embedding
+       text-embedding-ada-002
+             │
+             ▼
+       VectorStoreIndex
+       (Load Persisted Index)
+             │
+             ▼
+       Vector Similarity Search
+       Default Top K = 2
+             │
+             ▼
+       Retrieved Chunks
+       (Relevant PDF Context)
+             │
+             ▼
+       GPT-3.5 Turbo
+       Context + User Question
+             │
+             ▼
+       Generated Answer
+             │
+             ▼
+       Streamlit Chat UI
+```
+
 
 
 =============================================================================================================================
