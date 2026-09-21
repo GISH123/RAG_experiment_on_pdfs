@@ -7,6 +7,12 @@ PowerPoint: https://gamma.app/docs/LlamaIndex-RAG--rix0jnlnfuepdr5?mode=doc
 https://ragonmyvectordb.streamlit.app/  
 因streamlit是deploy在網路上 用的是他們的server 速度會比local自己建還慢一點 每按一個動作都要等一點延遲  
 
+## RAG System Architecture
+
+本專案使用 LlamaIndex 建立 PDF 文件檢索增強生成（RAG）系統，
+將 8 本全球經濟展望專書轉換為可檢索的向量索引，
+並透過 Streamlit 提供對話式問答介面。
+
 ### 1. Indexing Pipeline — 建立向量索引
 
 ```text
